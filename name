@@ -1,0 +1,158 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\student>  ssh -p 2011 student@149.156.194.192
+(student@149.156.194.192) Password:
+
+ System information as of Mon Mar 23 12:21:56 UTC 2026
+
+  System load:           0.36
+  Usage of /:            84.0% of 915.32GB
+  Memory usage:          9%
+  Swap usage:            0%
+  Temperature:           72.2 C
+  Processes:             24
+  Users logged in:       0
+  IPv4 address for eth0: 10.191.221.132
+  IPv6 address for eth0: fd42:e0c6:e7ff:c3b0:216:3eff:fe08:e436
+
+=================================================================
+           WITAJ W LABORATORIUM GIT & DOCKER (LXD)
+=================================================================
+ Jesteś zalogowany jako: student
+ Twoje środowisko jest odizolowane i gotowe do pracy.
+
+ PRZYDATNE KOMENDY NA START:
+  > git status     - sprawdzenie stanu lokalnego repozytorium
+  > docker ps      - lista aktualnie uruchomionych kontenerów
+  > clear          - wyczyszczenie ekranu terminala
+=================================================================
+
+Last login: Tue Mar 17 10:21:02 2026 from 127.0.0.1
+student@student-11:~$ git clone https://github.com/trodere/test_docker_jpai
+Cloning into 'test_docker_jpai'...
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 6 (delta 0), reused 5 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (6/6), done.
+student@student-11:~$ git config --global user.name "trodere"
+student@student-11:~$ git config --global user.email "n.k.tetke@icloud.com"
+student@student-11:~$ ls
+test_docker_jpai
+student@student-11:~$ cd test_docker_jpai
+student@student-11:~/test_docker_jpai$ ls
+README.md  app.js  package.json  zbuduj_mnie
+student@student-11:~/test_docker_jpai$ nano app.js
+
+student@student-11:~/test_docker_jpai$ docker build -t kolokwium:latest
+ERROR: docker: 'docker buildx build' requires 1 argument
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Run 'docker buildx build --help' for more information
+student@student-11:~/test_docker_jpai$ docker build -t kolokwium:latest .
+[+] Building 0.3s (1/1) FINISHED                                                       docker:default
+ => [internal] load build definition from Dockerfile                                             0.1s
+ => => transferring dockerfile: 2B                                                               0.0s
+ERROR: failed to build: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+student@student-11:~/test_docker_jpai$ mv zbuduj_mnie Dockerfile
+student@student-11:~/test_docker_jpai$ docker build -t kolokwium:latest
+ERROR: docker: 'docker buildx build' requires 1 argument
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Run 'docker buildx build --help' for more information
+student@student-11:~/test_docker_jpai$ docker build -t kolokwium:latest .
+[+] Building 12.9s (10/10) FINISHED                                                    docker:default
+ => [internal] load build definition from Dockerfile                                             0.0s
+ => => transferring dockerfile: 177B                                                             0.0s
+ => [internal] load metadata for docker.io/library/node:20-alpine                                1.8s
+ => [internal] load .dockerignore                                                                0.1s
+ => => transferring context: 2B                                                                  0.0s
+ => [1/5] FROM docker.io/library/node:20-alpine@sha256:b88333c42c23fbd91596ebd7fd10de239cedab96  3.6s
+ => => resolve docker.io/library/node:20-alpine@sha256:b88333c42c23fbd91596ebd7fd10de239cedab96  0.1s
+ => => sha256:7ad115895a6aadccf7f98a05c33873c04df2933ba557c5bcdbedd3de612803da 1.26MB / 1.26MB   0.4s
+ => => sha256:9d10d4687fae6e13c052431ea3221ccda835c3262df3564310345ffe173146d9 445B / 445B       0.5s
+ => => sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 3.86MB / 3.86MB   0.6s
+ => => sha256:ed2fdcee5269a06b0b8b77c69867176443364a72a9626e9aa2e66ab1ebda35a 43.22MB / 43.22MB  1.2s
+ => => extracting sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153        0.2s
+ => => extracting sha256:ed2fdcee5269a06b0b8b77c69867176443364a72a9626e9aa2e66ab1ebda35a7        1.6s
+ => => extracting sha256:7ad115895a6aadccf7f98a05c33873c04df2933ba557c5bcdbedd3de612803da        0.2s
+ => => extracting sha256:9d10d4687fae6e13c052431ea3221ccda835c3262df3564310345ffe173146d9        0.1s
+ => [internal] load build context                                                                0.1s
+ => => transferring context: 930B                                                                0.0s
+ => [2/5] WORKDIR /app                                                                           0.1s
+ => [3/5] COPY package*.json ./                                                                  0.1s
+ => [4/5] RUN npm install --no-progress                                                          4.7s
+ => [5/5] COPY app.js .                                                                          0.2s
+ => exporting to image                                                                           1.8s
+ => => exporting layers                                                                          0.8s
+ => => exporting manifest sha256:51350c109b8d678e1e65f4cab0ef7a8e43d1312897eb7a5f0fe0e7b356ecd8  0.1s
+ => => exporting config sha256:058020566ae48e90ce84f1f9df9ecf9dd087feec215ff9fb46adfe2d09a209c4  0.1s
+ => => exporting attestation manifest sha256:59382092cb90c5bee507bfdbd7f28643dd764754bde6ce1fa1  0.1s
+ => => exporting manifest list sha256:94b731805bfe5cf0ea9c6501d82ad8117881460cc83adb4ec9a3dfcbb  0.0s
+ => => naming to docker.io/library/kolokwium:latest                                              0.0s
+ => => unpacking to docker.io/library/kolokwium:latest                                           0.7s
+student@student-11:~/test_docker_jpai$ docker run -d -p 3000:3000 --name kontener kolokwium:latest
+eef31614868e66499891d5615af44125ed8b05330ddbe94a656dde4816c28237
+student@student-11:~/test_docker_jpai$ curl -f http://localhost:3000/
+
+    <!DOCTYPE html>
+    <html lang="pl">
+      <head>
+        <meta charset="utf-8">
+        <title>Kolokwium Docker + Node.js</title>
+      </head>
+      <body>
+        <h1>Kolokwium z Dockera</h1>
+        <p>Student: [IMIE NAZWISKO]</p>
+        <p>Obraz: kolokwium-nodejs:latest</p>
+        <p>Status: OK</p>
+      </body>
+    </html>
+  student@student-11:~/test_docker_jpai$ docker rm -f kontener
+kontener
+student@student-11:~/test_docker_jpai$ history | grep docker | tee docker.log
+    1  git clone https://github.com/trodere/test_docker_jpai
+    5  cd test_docker_jpai
+    9  docker build -t kolokwium:latest
+   10  docker build -t kolokwium:latest .
+   12  docker build -t kolokwium:latest
+   13  docker build -t kolokwium:latest .
+   14  docker run -d -p 3000:3000 --name kontener kolokwium:latest
+   16  docker rm -f kontener
+   17  history | grep docker | tee docker.log
+student@student-11:~/test_docker_jpai$ git add ..
+fatal: ..: '..' is outside repository at '/home/student/test_docker_jpai'
+student@student-11:~/test_docker_jpai$ git add test_docker_jpai
+fatal: pathspec 'test_docker_jpai' did not match any files
+student@student-11:~/test_docker_jpai$ git push\
+> git push
+git: 'pushgit' is not a git command. See 'git --help'.
+student@student-11:~/test_docker_jpai$ git push
+Username for 'https://github.com': trodere
+Password for 'https://trodere@github.com':
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/trodere/test_docker_jpai/'
+student@student-11:~/test_docker_jpai$ git push
+Username for 'https://github.com': trodere
+Password for 'https://trodere@github.com':
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/trodere/test_docker_jpai/'
+student@student-11:~/test_docker_jpai$ git config --global user.name "trodere"
+student@student-11:~/test_docker_jpai$ git config --global user.email "n.k.tetke@icloud.com"
+student@student-11:~/test_docker_jpai$ git push
+Username for 'https://github.com': trodere
+Password for 'https://trodere@github.com':
+Everything up-to-date
+student@student-11:~/test_docker_jpai$ git push
+Username for 'https://github.com': https://github.com/trodere/test_docker_jpai
+Password for 'https://https%3A%2F%2Fgithub.com%2Ftrodere%2Ftest_docker_jpai@github.com':
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/trodere/test_docker_jpai/'
+student@student-11:~/test_docker_jpai$ https://github.com/trodere/test_docker_jpai
+-bash: https://github.com/trodere/test_docker_jpai: No such file or directory
+student@student-11:~/test_docker_jpai$
